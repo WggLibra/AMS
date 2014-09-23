@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 25, 2012 11:50:25 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="org.ams.db.Student" table="g7_student" catalog="agile">
+        <id name="sid" type="java.lang.Integer">
+            <column name="sid" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="program" class="org.ams.db.Program" fetch="select">
+            <column name="pid" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name" not-null="true" />
+        </property>
+        <property name="rn" type="string">
+            <column name="rn" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="50"/>
+        </property>
+        <set name="records" table="g7_record"  cascade="delete" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="sid" not-null="true" />
+            </key>
+            <one-to-many class="org.ams.db.Record" />
+        </set>
+        <set name="modules" table="g7_ms" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="sid" not-null="true" />
+            </key>
+            <many-to-many entity-name="org.ams.db.Module">
+                <column name="mid" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

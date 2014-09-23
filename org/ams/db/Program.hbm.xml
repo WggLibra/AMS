@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 25, 2012 11:50:25 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="org.ams.db.Program" table="g7_program" catalog="agile">
+        <id name="pid" type="java.lang.Integer">
+            <column name="pid" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" not-null="true" />
+        </property>
+        <set name="users" table="g7_user" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="pid" />
+            </key>
+            <one-to-many class="org.ams.db.User" />
+        </set>
+        <set name="modules" table="g7_mp" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="pid" not-null="true" />
+            </key>
+            <many-to-many entity-name="org.ams.db.Module">
+                <column name="mid" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="students" table="g7_student" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="pid" />
+            </key>
+            <one-to-many class="org.ams.db.Student" />
+        </set>
+    </class>
+</hibernate-mapping>

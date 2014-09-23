@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 25, 2012 11:50:25 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="org.ams.db.Record" table="g7_record" catalog="agile">
+        <id name="rid" type="java.lang.Integer">
+            <column name="rid" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="student" class="org.ams.db.Student" lazy="false" fetch="select">
+            <column name="sid" not-null="true" />
+        </many-to-one>
+        <many-to-one name="module" class="org.ams.db.Module" lazy="false" fetch="select">
+            <column name="mid" not-null="true" />
+        </many-to-one>
+        <property name="date" type="date">
+            <column name="date" length="10" not-null="true" />
+        </property>
+        <property name="attend" type="boolean">
+            <column name="attend" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
